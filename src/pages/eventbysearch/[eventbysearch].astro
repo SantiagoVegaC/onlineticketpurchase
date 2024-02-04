@@ -1,0 +1,52 @@
+---
+import { events } from "../../models/events";
+import Card from "../../components/Card.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+  return [
+    { params: { eventbysearch: "Millonarios" } },
+    { params: { eventbysearch: "Concierto" } },
+  ] as {
+    params: { eventbysearch: string };
+  }[];
+}
+
+const { eventbysearch }: { eventbysearch: string } = Astro.params;
+
+const isEventMatch = events.filter((event): boolean => {
+  const lowercaseTitle = event.title?.toLowerCase();
+  const lowercaseDesc = event.desc?.toLowerCase();
+  const lowercaseeventbysearch = eventbysearch?.toLowerCase();
+
+  return (
+    lowercaseTitle.includes(lowercaseeventbysearch) ||
+    lowercaseDesc.includes(lowercaseeventbysearch)
+  );
+});
+---
+
+<Header />
+{
+  !isEventMatch.length ? (
+    ""
+  ) : (
+    <>
+      <div class="grid gap-6 mt-8 md:grid-cols-3 lg:grid-cols-4">
+        {isEventMatch.map(({ title, desc, href, img, id }): JSX.Element => {
+          return (
+            <Card
+              title={title}
+              desc={desc}
+              href={href}
+              img={img}
+              id={id}
+            />
+          );
+        })}
+      </div>
+      <Footer />
+    </>
+  )
+}

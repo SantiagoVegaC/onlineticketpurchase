@@ -1,0 +1,61 @@
+---
+import DetailedCard from "../../components/DetailedCard.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import { events } from "../../models/events";
+
+export async function getStaticPaths() {
+  return [
+    { params: { detailedevent: 1 } },
+    { params: { detailedevent: 2 } },
+    { params: { detailedevent: 3 } },
+    { params: { detailedevent: 4 } },
+    { params: { detailedevent: 5 } },
+    { params: { detailedevent: 6 } },
+    { params: { detailedevent: 7 } },
+    { params: { detailedevent: 8 } },
+  ] as {
+    params: { detailedevent: number };
+  }[];
+}
+
+const { detailedevent }: { detailedevent: number } = Astro.params;
+
+console.log("typeof", typeof detailedevent);
+
+const filteredEvent = events.find(
+  (event) => event.id === Number(detailedevent)
+);
+// section to select tickets
+---
+
+<Header />
+{
+  !filteredEvent ? (
+    ""
+  ) : (
+    <main>
+      <div class="mt-8 flex flex-col items-left">
+        <DetailedCard
+          title={filteredEvent.title}
+          date={filteredEvent.date}
+          time={filteredEvent.time}
+          city={filteredEvent.city}
+          address={filteredEvent.address}
+          desc={filteredEvent.desc}
+          id={filteredEvent.id}
+        />
+      </div>
+      <Footer />
+    </main>
+  )
+}
+
+<style>
+    main {
+      margin: auto;
+      padding: 1rem;
+      max-width: calc(100% - 2rem);
+      line-height: 1.6;
+    }
+  </style>

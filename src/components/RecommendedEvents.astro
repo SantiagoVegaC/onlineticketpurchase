@@ -1,0 +1,12 @@
+---
+import Card from "./Card.astro";
+import { events } from "../models/events";
+---
+
+<div class="grid gap-6 mt-8 md:grid-cols-3 lg:grid-cols-4">
+  {
+    events.map(({ img, href, title, desc, id }): JSX.Element => {
+      return <Card img={img} href={href} title={title} desc={desc} id={id} />;
+    })
+  }
+</div>

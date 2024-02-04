@@ -1,0 +1,10 @@
+---
+import Card from "./Card.astro";
+import { events } from "../models/events";
+const randomEvent = events[Math.floor(Math.random() * events.length)];
+const { href, title, desc, id } = randomEvent;
+---
+
+<div class="container px-4 md:px-6">
+  <Card href={href} title={title} desc={desc} id={id} />
+</div>

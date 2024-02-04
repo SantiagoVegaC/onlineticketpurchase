@@ -1,0 +1,98 @@
+<h2>Selecciona tus asientos</h2>
+
+<div id="seat-map">
+  <!-- Aquí se generarán los asientos dinámicamente -->
+</div>
+
+<div>
+  <p>Asientos seleccionados: <span id="selected-seats">0</span></p>
+  <p>Total a pagar: $<span id="total-price">0</span></p>
+  <button onclick="confirmPurchase()">Comprar</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const seatMapContainer = document.getElementById("seat-map");
+    const totalPriceContainer = document.getElementById("total-price");
+    let selectedSeats: any[] = [];
+
+    function createSeat(seatNumber: string | number | null) {
+      const seatElement = document.createElement("div");
+      seatElement.classList.add("seat");
+      seatElement.textContent = seatNumber as string;
+
+      seatElement.addEventListener("click", () => {
+        toggleSeatSelection(seatElement, seatNumber);
+      });
+
+      seatMapContainer && seatMapContainer.appendChild(seatElement);
+    }
+
+    function toggleSeatSelection(seatElement: HTMLDivElement, seatNumber: any) {
+      if (selectedSeats.includes(seatNumber)) {
+        // Deseleccionar el asiento
+        seatElement.classList.remove("selected");
+        selectedSeats = selectedSeats.filter((seat) => seat !== seatNumber);
+      } else {
+        // Seleccionar el asiento
+        seatElement.classList.add("selected");
+        selectedSeats.push(seatNumber);
+      }
+
+      updateSelectedSeats();
+    }
+
+    function updateSelectedSeats() {
+      totalPriceContainer!.textContent = (selectedSeats.length * 10).toString(); // Precio ficticio
+    }
+
+    // Crear 20 asientos para este ejemplo
+    for (let i = 1; i <= 20; i++) {
+      createSeat(i);
+    }
+
+    function confirmPurchase() {
+      // Aquí iría la lógica para confirmar la compra, redirigir al pago, etc.
+      console.log("Asientos seleccionados:", selectedSeats);
+      console.log("Total a pagar:", selectedSeats.length * 10); // Precio ficticio
+    }
+  });
+</script>
+
+<script>
+  const seatMapContainer = document.getElementById("seat-map");
+  const numRows = 5;
+  const seatsPerRow = 8;
+
+  // Crear asientos dinámicamente
+  for (let row = 1; row <= numRows; row++) {
+    for (let seatNum = 1; seatNum <= seatsPerRow; seatNum++) {
+      const seatElement = document.createElement("div");
+      seatElement.classList.add("seat");
+      seatElement.textContent = `${row}-${seatNum}`; // Puedes asignar nombres o números según sea necesario
+
+      // Agregar evento de clic para seleccionar/deseleccionar asientos
+      seatElement.addEventListener("click", () => {
+        seatElement.classList.toggle("selected");
+      });
+
+      // Agregar el asiento al contenedor
+      seatMapContainer && seatMapContainer.appendChild(seatElement);
+    }
+  }
+</script>
+
+<style>
+  /* Estilos para los asientos */
+  .seat {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    background-color: #eee;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .selected {
+    background-color: #7fff00; /* Verde para asientos seleccionados */
+  }
+</style>

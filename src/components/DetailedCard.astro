@@ -1,0 +1,88 @@
+---
+import SelectSeats from "./SelectSeats.astro";
+
+interface Props {
+  address?: string;
+  date?: string;
+  city?: string;
+  desc: string;
+  eventName?: string;
+  id: number;
+  time?: string;
+  title: string;
+}
+
+const { title, desc, id, date, time, eventName, city, address } = Astro.props;
+---
+
+<div
+  class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+>
+  <div class="p-5">
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      {title}
+    </h5>
+
+    {
+      desc ? (
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{desc}</p>
+      ) : (
+        ""
+      )
+    }
+    {
+      address ? (
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          {address}
+        </p>
+      ) : (
+        ""
+      )
+    }
+    {
+      date ? (
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{date}</p>
+      ) : (
+        ""
+      )
+    }
+    {
+      city ? (
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{city}</p>
+      ) : (
+        ""
+      )
+    }
+    {
+      time ? (
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{time}</p>
+      ) : (
+        ""
+      )
+    }
+  </div>
+</div>
+
+<br />
+
+<p class="flex flex-col text-pretty">
+  *Está incluido en el aforo total reservas técnicas, de artista y de
+  patrocinador que eventualmente pueden ser liberadas a venta. ** La
+  disponibilidad de boletería en cada etapa dependerá de las reservas efectuadas
+  en los Canales de Ticketlive. Una vez agotada una etapa, por adquisición y/o
+  reservas, no se podrán vender entradas de etapas anteriores. Toda reserva de
+  una etapa agotada, que no se haga efectiva posteriormente, ya sea por
+  devolución, retracto de compra, no pago, entre otros, pasará a hacer parte del
+  aforo (entradas disponibles) de la etapa que se encuentre actualmente
+  disponible. El precio de la entrada puede fluctuar en función de la oferta y
+  la demanda. IMPORTANTE: en caso de no cumplir con el requisito mínimo de edad
+  del evento, NO se le permitirá el ingreso al evento NI se realizará devolución
+  del dinero.
+</p>
+
+<section>
+  <span>Reserved space to select ticket of event</span>
+  <SelectSeats />
+</section>

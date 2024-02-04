@@ -1,0 +1,45 @@
+---
+import RightArrowIcon from "../assets/icons/RightArrowIcon.astro";
+
+interface Props {
+  desc: string;
+  href: string;
+  id: number;
+  img?: string;
+  title: string;
+}
+
+const { href, title, desc, img, id } = Astro.props;
+---
+
+<div
+  class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+>
+  {
+    img ? (
+      <img src={img} alt="event img" class="rounded-t-lg" />
+    ) : (
+      <img
+        src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"
+        alt="event img"
+        class="rounded-t-lg"
+      />
+    )
+  }
+  <div class="p-5">
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      {title}
+    </h5>
+
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 truncate">{desc}...</p>
+    <a
+      href={`${href}/${id}`}
+      class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      Ver evento
+      <RightArrowIcon />
+    </a>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import SearchContainer from "../components/SearchContainer.astro";
+import PopularCategories from "../components/PopularCategories.astro";
+import FeaturedEvents from "../components/FeaturedEvents.astro";
+import Footer from "../components/Footer.astro";
+import RecommendedEvents from "../components/RecommendedEvents.astro";
+---
+
+<Layout title="Online Ticket Booking">
+  <main>
+    <Header />
+    <section class="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+      <SearchContainer />
+    </section>
+
+    <section
+      class="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800"
+    >
+      <PopularCategories />
+    </section>
+
+    <section class="w-full py-12 md:py-24 lg:py-32">
+      <!-- Eventos especiales -->
+      <h2
+        class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center pb-24"
+      >
+        Featured Events
+      </h2>
+      <FeaturedEvents />
+    </section>
+
+    <section class="w-full md:py-24 lg:p-32 bg-gray-100 dark:bg-gray-800">
+      <h2
+        class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center pb-24"
+      >
+        Recommended Events
+      </h2>
+
+      <RecommendedEvents />
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+</style>
