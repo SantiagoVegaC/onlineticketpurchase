@@ -2,37 +2,25 @@ import { pool } from "../db.js";
 
 export const registerUser = async (req, res) => {
   try {
-    const {
-      user_id,
-      first_name,
-      last_name,
-      email,
-      password,
-      creation_date,
-      last_access_date,
-      updated_at,
-      enabled,
-    } = req.body;
+    console.log('bject.keys(req.body)', Object.keys(req.body).length);
+    // if (req.body === undefined ) return
+    const { firstName, lastName, email, password } = req.body;
+    console.log('req.body', req.body);
+
     const [result] = await pool.query(
-      "INSERT INTO users(user_id, first_name, last_name, email, password, creation_date, last_access_date, updated_at, enabled) VALUES (?, ?)",
-      [
-        user_id,
-        first_name,
-        last_name,
-        email,
-        password,
-        creation_date,
-        last_access_date,
-        updated_at,
-        enabled,
-      ]
+      "INSERT INTO users(first_name, last_name, email, password) VALUES (?, ?, ?, ?)",
+      [firstName, lastName, email, password]
     );
-    console.log("result", result);
     res.json({
       id: result.insertId,
-      first_name,
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      password,
     });
+    res.send()
   } catch (error) {
+    console.log("error saving new user");
     return res.status(500).json({ message: error.message });
   }
 };
