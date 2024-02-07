@@ -1,12 +1,30 @@
 ---
 import Card from "./Card.astro";
-import { events } from "../models/events";
+import { getEventsRequest } from "../../api/events.api";
+
+const response = await getEventsRequest();
 ---
 
 <div class="grid gap-6 mt-8 md:grid-cols-3 lg:grid-cols-4">
   {
-    events.map(({ img, href, title, desc, id }): JSX.Element => {
-      return <Card img={img} href={href} title={title} desc={desc} id={id} />;
-    })
+    response.map(
+      (item: {
+        event_img: string | undefined;
+        event_redirection: string;
+        event_name: string;
+        event_desc: string;
+        event_id: number;
+      }): JSX.Element => {
+        return (
+          <Card
+            event_img={item.event_img}
+            event_redirection={item.event_redirection}
+            event_name={item.event_name}
+            event_desc={item.event_desc}
+            event_id={item.event_id}
+          />
+        );
+      }
+    )
   }
 </div>

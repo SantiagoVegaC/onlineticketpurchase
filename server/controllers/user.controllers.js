@@ -3,9 +3,8 @@ import { pool } from "../db.js";
 export const registerUser = async (req, res) => {
   try {
     console.log('bject.keys(req.body)', Object.keys(req.body).length);
-    // if (req.body === undefined ) return
+    if (req.body === undefined ) return
     const { firstName, lastName, email, password } = req.body;
-    console.log('req.body', req.body);
 
     const [result] = await pool.query(
       "INSERT INTO users(first_name, last_name, email, password) VALUES (?, ?, ?, ?)",
