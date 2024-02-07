@@ -21,8 +21,6 @@ export async function getStaticPaths() {
 
 const { detailedevent }: { detailedevent: number } = Astro.params;
 
-console.log("typeof", typeof detailedevent);
-
 const filteredEvent = events.find(
   (event) => event.id === Number(detailedevent)
 );

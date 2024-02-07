@@ -3,15 +3,14 @@ import RightArrowIcon from "../assets/icons/RightArrowIcon.astro";
 
 interface Props {
   event_desc: string;
-  event_redirection: string;
   event_id: number;
   event_img?: string | undefined;
   event_name: string;
+  event_redirection: string;
 }
 
 const { event_redirection, event_name, event_desc, event_img, event_id } = Astro.props;
 
-console.log("Astro.props", Astro.props);
 ---
 
 <div

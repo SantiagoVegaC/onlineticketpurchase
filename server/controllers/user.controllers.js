@@ -2,7 +2,6 @@ import { pool } from "../db.js";
 
 export const registerUser = async (req, res) => {
   try {
-    console.log('bject.keys(req.body)', Object.keys(req.body).length);
     if (req.body === undefined ) return
     const { firstName, lastName, email, password } = req.body;
 
@@ -19,7 +18,6 @@ export const registerUser = async (req, res) => {
     });
     res.send()
   } catch (error) {
-    console.log("error saving new user");
     return res.status(500).json({ message: error.message });
   }
 };

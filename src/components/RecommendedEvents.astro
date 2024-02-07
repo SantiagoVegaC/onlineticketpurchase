@@ -7,7 +7,7 @@ const response = await getEventsRequest();
 
 <div class="grid gap-6 mt-8 md:grid-cols-3 lg:grid-cols-4">
   {
-    response.map(
+    response?.map(
       (item: {
         event_img: string | undefined;
         event_redirection: string;
