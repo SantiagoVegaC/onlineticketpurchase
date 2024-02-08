@@ -11,3 +11,17 @@ export const createUserRequest = async (user) => {
     console.error(error);
   }
 };
+
+export const loginRequest = async (credentials) => {
+  try {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    };
+
+    await fetch("http://localhost:3001/login", requestOptions);
+  } catch (error) {
+    console.error(error);
+  }
+};
