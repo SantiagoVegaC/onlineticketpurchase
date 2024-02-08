@@ -1,10 +1,30 @@
 ---
 import Card from "./Card.astro";
-import { events } from "../models/events";
-const randomEvent = events[Math.floor(Math.random() * events.length)];
-const { href, title, desc, id } = randomEvent;
+import { getFeaturedEvents } from "../../api/events.api";
+
+const response = await getFeaturedEvents();
 ---
 
-<div class="container px-4 md:px-6">
-  <Card href={href} title={title} desc={desc} id={id} />
+<div class="grid gap-6 mt-8 md:grid-cols-3 lg:grid-cols-4">
+  {
+    response?.map(
+      (item: {
+        event_img: string | undefined;
+        event_redirection: string;
+        event_name: string;
+        event_desc: string;
+        event_id: number;
+      }): JSX.Element => {
+        return (
+          <Card
+            event_img={item.event_img}
+            event_redirection={item.event_redirection}
+            event_name={item.event_name}
+            event_desc={item.event_desc}
+            event_id={item.event_id}
+          />
+        );
+      }
+    )
+  }
 </div>

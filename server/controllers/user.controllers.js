@@ -2,7 +2,7 @@ import { pool } from "../db.js";
 
 export const registerUser = async (req, res) => {
   try {
-    if (req.body === undefined ) return
+    if (req.body === undefined) return;
     const { firstName, lastName, email, password } = req.body;
 
     const [result] = await pool.query(
@@ -10,14 +10,15 @@ export const registerUser = async (req, res) => {
       [firstName, lastName, email, password]
     );
     res.json({
-      id: result.insertId,
+      user_id: result.insertId,
       first_name: firstName,
       last_name: lastName,
       email,
       password,
     });
-    res.send()
+    res.send();
   } catch (error) {
+    console.log('error creating new user', error);
     return res.status(500).json({ message: error.message });
   }
 };
