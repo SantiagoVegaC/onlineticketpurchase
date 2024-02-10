@@ -31,7 +31,6 @@ export const getUserByData = async (req, res) => {
       "SELECT * FROM USERS where email = ? and password = ?",
       [email, password]
     );
-    console.log('result', result);
     if (result.length === 0) {
       console.error("wrong credentials", error);
       return res.status(409).json({ message: "wrong credentials" });

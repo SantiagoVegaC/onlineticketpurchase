@@ -9,7 +9,7 @@ const response = await getFeaturedEvents();
   {
     response?.map(
       (item: {
-        event_img: string | undefined;
+        event_img: any;
         event_redirection: string;
         event_name: string;
         event_desc: string;

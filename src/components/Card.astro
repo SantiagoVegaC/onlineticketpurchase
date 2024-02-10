@@ -4,13 +4,19 @@ import RightArrowIcon from "../assets/icons/RightArrowIcon.astro";
 interface Props {
   event_desc: string;
   event_id: number;
-  event_img?: string | undefined;
+  event_img?: any;
   event_name: string;
   event_redirection: string;
 }
 
-const { event_redirection, event_name, event_desc, event_img, event_id } = Astro.props;
+const { event_redirection, event_name, event_desc, event_img, event_id } =
+  Astro.props;
 
+let imageUrl= "";
+
+if (event_img.data.length > 0) {
+  imageUrl = Buffer.from(event_img).toString("base64");
+}
 ---
 
 <div
@@ -18,7 +24,11 @@ const { event_redirection, event_name, event_desc, event_img, event_id } = Astro
 >
   {
     event_img ? (
-      <img src={event_img} alt="event img" class="rounded-t-lg" />
+      <img
+        src={`data:image/jpeg;base64, ${imageUrl}`}
+        alt="event img"
+        class="rounded-t-lg"
+      />
     ) : (
       <img
         src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"
