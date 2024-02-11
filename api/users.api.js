@@ -20,8 +20,14 @@ export const loginRequest = async (credentials) => {
       body: JSON.stringify(credentials),
     };
 
-    await fetch("http://localhost:3001/login", requestOptions);
+    const response = await fetch("http://localhost:3001/login", requestOptions);
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      const error = new Error(errorMessage)
+      error.errorCodeStatus = response.status;
+      throw error;
+    }
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };

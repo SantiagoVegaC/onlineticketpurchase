@@ -31,14 +31,14 @@ export const getUserByData = async (req, res) => {
       "SELECT * FROM USERS where email = ? and password = ?",
       [email, password]
     );
-    if (result.length === 0) {
-      console.error("wrong credentials", error);
-      return res.status(409).json({ message: "wrong credentials" });
+
+    if (!result || result.length === 0) {
+      return res.status(409).json({error: "Wrong credentials", errorCodeStatus: 409})
     }
+
     res.json(result);
-    location.href = "/";
   } catch (error) {
-    console.error("error getting user", error);
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({error: "Internal error server"})
+
   }
 };

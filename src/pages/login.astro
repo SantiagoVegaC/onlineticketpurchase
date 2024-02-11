@@ -130,7 +130,7 @@ import Header from "../components/Header.astro";
           </div>
           <div class="flex items-center justify-between">
             <div class="flex items-start">
-              <div class="flex items-center h-5">
+              <!-- <div class="flex items-center h-5">
                 <input
                   id="remember"
                   aria-describedby="remember"
@@ -143,7 +143,7 @@ import Header from "../components/Header.astro";
                 <label for="remember" class="text-gray-500 dark:text-gray-300"
                   >Remember me</label
                 >
-              </div>
+              </div> -->
             </div>
             <a
               href="/forgotPassword"
@@ -179,7 +179,7 @@ import Header from "../components/Header.astro";
 
 <script>
   // Normal signIn
-  import { loginRequest } from "../../api/users.api";
+import { loginRequest } from "../../api/users.api";
 
   const searchButton = document.querySelector("#signin");
   const emailButton = document.getElementById("email") as HTMLInputElement;
@@ -187,7 +187,8 @@ import Header from "../components/Header.astro";
     "password"
   ) as HTMLInputElement;
   if (emailButton && passwordButton) {
-    searchButton?.addEventListener("click", async () => {
+    searchButton?.addEventListener("click", async (event) => {
+      event.preventDefault();
       const emailValue = emailButton.value.trim();
       const passwordValue = passwordButton.value.trim();
       if (emailValue && passwordValue) {
@@ -195,7 +196,12 @@ import Header from "../components/Header.astro";
           email: emailValue,
           password: passwordValue,
         };
-        await loginRequest(loginCredentials);
+        try {
+          await loginRequest(loginCredentials);
+        } catch (error: any) {
+          console.log(error.errorCodeStatus);
+         
+        }
       }
     });
   }
